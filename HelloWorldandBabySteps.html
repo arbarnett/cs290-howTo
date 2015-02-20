@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+   <meta charset="utf-8" />
+
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="width=device-width" />
+
+  <title>Hello World and Baby Steps</title>
+
+  <link rel="stylesheet" href="foundation.css">
+  </head>
+  <body>
+      <div class="row">
+        <div class="large-3 columns">
+          <h1><img src="http://placehold.it/400x100&text=Logo"/></h1>
+        </div>
+        <div class="large-9 columns">
+          <ul class="inline-list right">
+            <li><a href="#">Section 1</a></li>
+            <li><a href="#">Section 2</a></li>
+            <li><a href="#">Section 3</a></li>
+            <li><a href="#">Section 4</a></li>
+          </ul>
+        </div>
+      </div>
+      
+       
+      
+      
+      <div class="row">    
+        
+         
+         
+        <div class="large-9 push-3 columns">
+          
+          <h3>"Hello World" and "Baby Steps" </h3>
+          <h4>Simple Output </h4>
+          <p>To complete this exercise, you need to know <code>console.log()</code>.</p>
+          <p><em>console.log()</em> is a debugging tool used to print information to the console, or in the case of completeing the Learn You Node exercises, the Terminal.</p>
+          <p>Web developers use this tool to check what values variables hold at various points in the program. For example, with lines of code as follows: </p>
+          <pre><code>var x = 4; <br/>console.log(x); </code></pre>
+          <p>This will print '4' to the console.</p>
+          <p>Other times, it can be used to see when a program breaks, by printing statements when it enters a function or a different page. </p>
+          <p>In the "Hello World" exercise, you just need to print the phrase "Hello World" to the console.</p>
+          <h4>Command Line Arguments</h4>
+          <p>Command line arguments are values passed to your program through the command line. There are two important variables that track these values.  The first is <code>argc</code>. This is an integer that represents the number of arguments passed on the command line.  The second is an array called <code>argv</code>. The elements in this array are the values you passed on the command line.</p>
+          <p>To access the elements of <code>argv</code>, you use the <code>process.argv</code> variable</p>
+          <p>Let's look at an example:</p>
+          <p>If I type on the command line this following code: </p> 
+          <pre><code>node programName.js Allie Barnett</code></pre>
+          <p>The <code>argv</code> array holds the following values in its indexes:</p>
+          <pre><code>process.argv[0]= "node"<br/>process.argv[1]="programName.js"<br/>process.argv[2]="Allie"<br/>process.argv[3]="Barnett"<br/></code></pre>
+          <p>Note that the first two values in this array are "node", the program that will run the file, and "programName.js", the file you would like to run. </p>
+          <p>Taking what we learned about simple output and command line arguments, let's use the code from above to print out a greeting the user who enters their name on the command line:</p>
+          <pre><code>
+          var firstName = process.argv[2];
+          var lastName = process.argv[3];
+
+          console.log("Hello, " + firstName + " " + lastName);
+          </code></pre>
+          <p>On the command line, if you were to type:</p>
+          <pre><code>node programName.js Allie Barnett</code></pre>
+          <p>The program would run, and it would print:</p>
+          <pre><code>Hello, Allie Barnett</code></pre>
+                
+        </div>
+        
+        
+         
+         
+        <div class="large-3 pull-9 columns">
+            
+          <ul class="side-nav">
+         <li><a href="GettingStarted.html">Getting Started with Node.js</a></li>
+            <li><a href="LearnYouNodePrograms.html">Learn You Node Programs</a></li>
+            <li><a href="HelloWorldandBabySteps.html">"Hello World" and "Baby Steps"</a></li>
+            <li><a href="MyFirstIO.html">"My First I/O"</a></li>
+            <li><a href="#">"My First Async I/O"</a></li>
+            <li><a href="#">"Filtered LS"</a></li>
+            <li><a href="#">"Make It Modular"</a></li>
+          </ul>
+          
+          <p><img src="http://placehold.it/320x240&text=Ad"/></p>
+            
+        </div>
+        
+      </div>
+        
+      
+       
+      
+      <footer class="row">
+        <div class="large-12 columns">
+          <hr/>
+          <div class="row">
+            <div class="large-6 columns">
+              <p>© Copyright no one at all. Go to town.</p>
+            </div>
+            <div class="large-6 columns">
+              <ul class="inline-list right">
+                <li><a href="#">Section 1</a></li>
+                <li><a href="#">Section 2</a></li>
+                <li><a href="#">Section 3</a></li>
+                <li><a href="#">Section 4</a></li>
+              </ul>
+            </div>
+          </div>
+        </div> 
+      </footer>
+  </body>
+</html>
