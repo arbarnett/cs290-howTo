@@ -54,12 +54,7 @@
           <pre><code>process.argv[0]= "node"<br/>process.argv[1]="programName.js"<br/>process.argv[2]="Allie"<br/>process.argv[3]="Barnett"<br/></code></pre>
           <p>Note that the first two values in this array are "node", the program that will run the file, and "programName.js", the file you would like to run. </p>
           <p>Taking what we learned about simple output and command line arguments, let's use the code from above to print out a greeting the user who enters their name on the command line:</p>
-          <pre><code>
-          var firstName = process.argv[2];
-          var lastName = process.argv[3];
-
-          console.log("Hello, " + firstName + " " + lastName);
-          </code></pre>
+          <pre><code>var firstName = process.argv[2];<br/>var lastName = process.argv[3];<br/><br/>console.log("Hello, " + firstName + " " + lastName);</code></pre>
           <p>On the command line, if you were to type:</p>
           <pre><code>node programName.js Allie Barnett</code></pre>
           <p>The program would run, and it would print:</p>
