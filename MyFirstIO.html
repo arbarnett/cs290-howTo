@@ -43,20 +43,21 @@
           <p>This, in technical terms, sets the variable 'fs' to a reference to the fs module. In layman's terms, this line of code gives the variable 'fs' all the functionality that comes with the filestream module, such as the ability to open, read, write, or copy a file (in addition to many more).</p>
           <h4>Synchronous?</h4>
           <p>This exercise, "My First I/O" requires that you read this file <strong>synchronously</strong>. When you execute something, such as a read file operation, synchronously it means that this operation must complete before you can move on to another operation.  In the case of this exercise, it means that the entire file must be read before you could move onto another operation, such as a function that searches for a particular content of the file.</p> 
-          <p>To synchronously read a file, you use the method <code>fs.readFileSync()</code> method. This method requires 1 parameter passed to it: the name of the file you would like to read. This method, by default, returns a <strong>buffer</strong> object. Buffer objects are an efficient way of representing data (ASCII, binary, etc.). Because the <code>fs.readFileSync()</code> method returns an object, that means you need to set a variable to this method, such as:</p>
+          <p>To synchronously read a file, you use the <code>fs.readFileSync()</code> method. This method requires 1 parameter passed to it: the name of the file you would like to read (more parameters are optional). This method, by default, returns a <strong>buffer</strong> object. Buffer objects are an efficient way of representing data (ASCII, binary, etc.). Because the <code>fs.readFileSync()</code> method returns an object, that means you need to set a variable to this method, such as:</p>
           <code>var contents = fs.readFileSync(fileName)</code>
           <p>Note: In the Learn You Node exercise, the fileName is passed through the command line, so you will access it/call it as a parameter similarly to how to accessed the integers in "Baby Steps"</p>
-          <h4>Pass a Function As a Parameter</h4>
-          <p>In JavaScript, you can pass a function as a parameter. This is helpful in this exercise, because like previously said, the <code>fs.readFileSync()</code> method returns a buffer object, which is not usually readable to a human. So, as an additional (optional) parameter to this method, we can pass a function that manipulates the buffer objects in the ways that we need to complete this exercise. So, our call to the <code>fs.readFileSync()</code> method will now look like this:</p>
-          <pre><code>var contents = fs.readFileSync(process.argv[2], function(){<br/>     //function code goes here<br/>});</code></pre>
-          <p>Now, what do we need to do in that function? Well, let's put it into a readable format using the following line:</p>
+          <p>Now you just do the necessary steps to complete the exercise.</p>
+          <p>First, you need to put it into a readable format using the following line:</p>
           <code>var contentsString = contents.toString();</code>
-          <p>Now, it is in string format. Since the goal of this exercise is to count the number of newlines in this file, let's put the strings into an array with the newline character being the delimiter (that character that tells us to stop storing data to an element and start a new element to be filled with data):</p>
+          <p>Now, it is in string format. Since the goal of this exercise is to count the number of newlines in this file, let's break the string into an array with the newline character being the delimiter (that character that tells us to stop storing data to an element and start a new element to be filled with data):</p>
           <code>var contentsArray = contentsString.split('\n');</code>
-          <p>Now we just count the number of elements in this array, minus 1, to calculate the number of newlines, there were:</p>
+          <p>Now you just count the number of elements in this array, minus 1, to calculate the number of newlines:</p>
           <code>var newLineCount = contentsArray.length - 1;</code>
           <p>The final step is to print this number to the console, and you're done! So, the final code will look like this:</p>
-          <pre><code>var fs = require('fs');<br/>var contents = fs.readFileSync(process.argv[2], function(){<br/>     var contentsString = contents.toString();<br/>     var contentsArray = contentsString.split('\n');<br/>     var newLineCount = contentsArray.length - 1;<br/>     console.log(newLineCount);<br/>});</code></pre>
+          <pre><code>var fs = require('fs');<br/>var contents = fs.readFileSync(process.argv[2]);<br/>var contentsString = contents.toString();<br/>var contentsArray = contentsString.split('\n');<br/>var newLineCount = contentsArray.length - 1;<br/>console.log(newLineCount);</code></pre>
+          <p>Because this is a synchronous call, the entire file must be read before we can manipulate the contents of the file.  You can see how this would take a lot of time if it were a large file. What if this was a part of a page of a website? Would the rest of the page wait to be functional until the file was read? There must be a better way...</p>
+
+          
                 
         </div>
         
