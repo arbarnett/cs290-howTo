@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+   <meta charset="utf-8" />
+
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="width=device-width" />
+
+  <title>Filtered LS</title>
+
+  <link rel="stylesheet" href="foundation.css">
+  </head>
+  <body>
+      <div class="row">
+        <div class="large-3 columns">
+          <h1><img src="http://placehold.it/400x100&text=Logo"/></h1>
+        </div>
+        <div class="large-9 columns">
+          <ul class="inline-list right">
+            <li><a href="#">Section 1</a></li>
+            <li><a href="#">Section 2</a></li>
+            <li><a href="#">Section 3</a></li>
+            <li><a href="#">Section 4</a></li>
+          </ul>
+        </div>
+      </div>
+      
+       
+      
+      
+      <div class="row">    
+        
+         
+         
+        <div class="large-9 push-3 columns">
+          
+          <h3>"Filtered LS"</h3>
+          <p>This exercise will give you a good opportunity to put all that we've learned to this point to use.</p>
+          <h4>Path Module</h4>
+          <p>Similar to the filestream module (which you also need in this exercise), you will need access to the path module. Accessing this is done exactly like you did for the filestream module:</p> 
+          <code>var path = require('path');</code><br/><br/>
+          <p>This module contains a method that will allow you to access the extension names of files within a directory. The user is to input the directory name and the extension name they want to filter by into the command line. In order to compare the directory's files' extension names with the user-inputted extenstion, make a variable using the command line input.  You will need to concatenate a period before this value:</p>
+          <code>var directory = process.argv[2];<br/>var extension = '.' + process.argv[3];</code><br/><br/>
+          <h4>readdir() Method</h4>
+          <p>Similar to the last exercise, the <code>readdir()</code> method requires that the first parameter be the directory name, and the second parameter be a callback function.  This callback function has two parameters. The first is err, where any errors that occur while reading the directory will be passed, and the second is list, where the list of files within the directory will be passed. Now, within that callback function, you need to compare your extension variable to each of the files' extensions. This is done using one of the path module's built in methods: the <code>extname(filename)</code> method.</p>
+          <p>The final code will look like this:</p>
+          <pre><code>var fs = require('fs');<br/>var path = require('path');<br/>var directory = process.argv[2];<br/>var extension = '.' + process.argv[3];<br/><br/>fs.readdir(directory, function(err, list){<br/>     if (err) {<br/>           console.log(err);<br/>     }<br/>     list.forEach(function(filename){<br/>          var ext = path.extname(filename);<br/>          if(ext === extension) {<br/>               console.log(filename);<br/>          }<br/>     });<br/>});</code></pre><br/><br/>
+          <p>Note that in this code, there is a callback function used in the foreach loop. This function is performd on every file that is in the list.</p>
+        </div>
+        
+        
+         
+         
+        <div class="large-3 pull-9 columns">
+            
+          <ul class="side-nav">
+            <li><a href="GettingStarted.html">Getting Started with Node.js</a></li>
+            <li><a href="LearnYouNodePrograms.html">Learn You Node Programs</a></li>
+            <li><a href="HelloWorldandBabySteps.html">"Hello World" and "Baby Steps"</a></li>
+            <li><a href="MyFirstIO.html">"My First I/O"</a></li>
+            <li><a href="MyFirstAsyncIO.html">"My First Async I/O"</a></li>
+            <li><a href="FilteredLS.html">"Filtered LS"</a></li>
+            <li><a href="MakeItModular.html">"Make It Modular"</a></li>
+          </ul>
+          
+          <p><img src="http://placehold.it/320x240&text=Ad"/></p>
+            
+        </div>
+        
+      </div>
+        
+      
+       
+      
+      <footer class="row">
+        <div class="large-12 columns">
+          <hr/>
+          <div class="row">
+            <div class="large-6 columns">
+              <p>© Copyright no one at all. Go to town.</p>
+            </div>
+            <div class="large-6 columns">
+              <ul class="inline-list right">
+                <li><a href="#">Section 1</a></li>
+                <li><a href="#">Section 2</a></li>
+                <li><a href="#">Section 3</a></li>
+                <li><a href="#">Section 4</a></li>
+              </ul>
+            </div>
+          </div>
+        </div> 
+      </footer>
+  </body>
+</html>
+   
