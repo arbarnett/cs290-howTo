@@ -14,15 +14,9 @@
   <body>
       <div class="row">
         <div class="large-3 columns">
-          <h1><img src="http://placehold.it/400x100&text=Logo"/></h1>
+          <h1><img src="nodejs.jpeg"/></h1>
         </div>
         <div class="large-9 columns">
-          <ul class="inline-list right">
-            <li><a href="#">Section 1</a></li>
-            <li><a href="#">Section 2</a></li>
-            <li><a href="#">Section 3</a></li>
-            <li><a href="#">Section 4</a></li>
-          </ul>
         </div>
       </div>
       
@@ -35,14 +29,75 @@
          
         <div class="large-9 push-3 columns">
           
-          <h3>"Make It Modular"</h3>
+          <h2>"Make It Modular"</h2>
           <h4>Modules: What are they?</h4>
           <p>A module is a collection of code that is accessible to other programs. We have already used two different modules.  We used the filestream module and the path module.  As you saw, when we access a module, we then have the ability to call methods that belong to the module (such as how we read files, or accessed a file's extemsion).</p>
           <p>So, we have used modules that are available through libraries, but you can also make your own modules. The purpose of a module is to allow this piece of code to be used in many different files, and potentially by many different users. For example, in this exercise, the purpose of the module you need to create is to filter the contents of a directory to match the target extension name. You might need to use this many times. Perhaps you have a program that gathers all the jpegs in a directory and stores them in a picture directory, or another program might need to find all the txt files in a directory so that they can all be concatenated into one file. So, as you can see, many different programs might need to use this module. Organizing this code (that filters the directory's list of files) into a module saves us from having to duplicate it in more place than one.</p> 
           <h4>Make Your Own Module</h4>
-          <p>Each module 'lives' in its own file. This file will contain the </p>
+          <p>Essentially what you do, is put all that you did in the last exercise ("Filtered LS"), inside a function.  There are a few differences though. First, this module will have a more specific purpose than in the last, next how we handle the callback function, and lastly, how we access the user input.</p>
+          <p>In the last exercise, we called console.log each time a file that matched the extension was found, this time, we will push the file into an array.  This makes this module have a more specific task.  Its purpose is simply to find the files and store them in a variable.  Then, we can print them to the screen, or do whatever we want with them later. </p>
+          <p>The other difference is the callback.  In this module, the callback will be a parameter passed into it.  If an error occurs, the callback will return an error and no data.  If no error occurs, the callback will return no errors and the data (which in this case, will be the files now stored in an array).</p>
+          <p>In the last exercise, we got the user input from the user and assigned it to a variable.  However, since we want this module to be able to be used many times, in many different scenarios, we want to make it more general.  So, the directory and extension variables will be passed to this module along with the callback function. This allows the caller to provide the input, and allows the module to do only its job.</p>
+          <p>Put that all together, and your function should look something like this:</p>
+          <pre><code>function(directory, extension, callback) {
+  var fs = require('fs');
+  var path = require('path');
+
+  fs.readdir(directory, function(err, list){
+    if (err) {
+      callback(err);
+      return;
+    }
+    var files = [];
+    list.forEach(function(filename){
+      var ext = path.extname(filename);
+      if(ext === '.' + extension) {
+        files.push(filename);
+      }
+    });
+    callback(null, files);
+  });
+  };</code></pre>
+          <p>Each module 'lives' in its own file. This file will contain the code written to perform the specific task you want your module to do. Because every module 'lives' in its own file, you will have many many files for more complex projects.  This is good! But wait, how do you get access to all these files?</p>
           <h4>How to access a module</h4>
-          <p></p>
+          <p>In your module file, you need to specify that the code you have written is to be accessible to other files. To do this, you assign the code you wrote to <code>module.exports</code> like so:</p>
+          <pre><code>module.exports = function(parameter1, parameter2, callback) {....};</code></pre>
+          <p>So, now, your module file should look like this:</p>
+          <pre><code>module.exports = function(directory, extension, callback) {
+  var fs = require('fs');
+  var path = require('path');
+
+  fs.readdir(directory, function(err, list){
+    if (err) {
+      callback(err);
+      return;
+    }
+    var files = [];
+    list.forEach(function(filename){
+      var ext = path.extname(filename);
+      if(ext === '.' + extension) {
+        files.push(filename);
+      }
+    });
+    callback(null, files);
+  });
+};</code></pre>
+          <p>Now, in the program that will call this module, you actually already have a pretty good idea of what you need to do! Think about the filestream module and path module. How did we access it?</p>
+          <pre><code>var module = require ('./makeItModularModule.js');</code></pre>
+          <p>NOTE: the text that preceeds the .js will be the filename that you store your module under. You must include the backslash before the text.</p>
+          <p>This file that calls the module will also need to gather the user information and pass it to the module (like you did with the filename to the filestream module).</p>
+          <p>So, putting this all together, your file that calls your module should look like this:</p>
+          <pre><code>var module = require ('./makeItModularModule.js');
+
+module (process.argv[2], process.argv[3], function(err,data) {
+  if (err) {
+    console.log(err);
+  } else {
+    for (var i=0; i < data.length; i++) {
+      console.log(data[i]);
+    }
+  }
+});</code></pre>
                 
         </div>
         
@@ -61,7 +116,7 @@
             <li><a href="MakeItModular.html">"Make It Modular"</a></li>
           </ul>
           
-          <p><img src="http://placehold.it/320x240&text=Ad"/></p>
+    
             
         </div>
         
@@ -78,12 +133,6 @@
               <p>© Copyright no one at all. Go to town.</p>
             </div>
             <div class="large-6 columns">
-              <ul class="inline-list right">
-                <li><a href="#">Section 1</a></li>
-                <li><a href="#">Section 2</a></li>
-                <li><a href="#">Section 3</a></li>
-                <li><a href="#">Section 4</a></li>
-              </ul>
             </div>
           </div>
         </div> 
